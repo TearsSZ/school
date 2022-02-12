@@ -28,6 +28,10 @@ public class Leave {
     @TableId(value = "l_id", type = IdType.AUTO)
     private Integer lId;
 
+    @ApiModelProperty("班级id")
+    @TableField("c_id")
+    private Integer cId;
+
     @ApiModelProperty("请假人")
     @TableField("u_id")
     private Integer uId;
@@ -66,7 +70,7 @@ public class Leave {
 
     @ApiModelProperty("提交时间")
     @TableField("current_time")
-    private String currentTime;
+    private LocalDateTime currentTime;
 
     @ApiModelProperty("状态0提交，1通过，2不通过")
     @TableField("status")

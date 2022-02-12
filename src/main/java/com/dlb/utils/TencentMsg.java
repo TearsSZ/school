@@ -1,6 +1,5 @@
 package com.dlb.utils;
 
-import com.dlb.config.QieMsgConfig;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 import com.tencentcloudapi.common.profile.ClientProfile;
@@ -8,8 +7,9 @@ import com.tencentcloudapi.common.profile.HttpProfile;
 import com.tencentcloudapi.sms.v20210111.SmsClient;
 import com.tencentcloudapi.sms.v20210111.models.*;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import java.util.Random;
 
@@ -19,17 +19,20 @@ import java.util.Random;
 
 
 //腾讯短信
-@Component
-@Data
+@Configuration
+@PropertySource("classpath:allocation.properties") //读取配置文件allocation
+@ConfigurationProperties(prefix="msg") //读取qq节点
+@Data //使用set方法将oss节点中的值填充到当前类的属性中
+//打开项目设置选择模块--spring---点击spring开关按钮--点击加号找到目标文件，
+//此时配置文件是全黄色，重启项目或者重新构建项目就OK了，可以点击跳转！记得不要忘记导包
 @SuppressWarnings("all")
 public class TencentMsg {
-    @Autowired
-    private QieMsgConfig qieMsgConfig;
+
     //秘钥
-    private  String secretId=qieMsgConfig.getSecretId();
-    private  String secretKey=qieMsgConfig.getSecretKey();
+    private  String secretId;
+    private  String secretKey;
     /* 短信应用ID: 短信SdkAppId在 [应用管理列表] */
-    private  String sdkAppId = qieMsgConfig.getSdkAppId();
+    private  String sdkAppId;
     /* 短信签名内容 必须填写已审核通过的签名 */
     private  String signName = "一起走呗个人网";
     /* 国际/港澳台短信 SenderId: 国内短信填空，默认未开通 */

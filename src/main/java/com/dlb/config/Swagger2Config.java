@@ -18,6 +18,11 @@ import java.util.ArrayList;
 /**
  * @author tears
  * @date 2022/1/8
+ * /*
+ * 类注解Api(tags = "登录模块")
+ * 方法注解ApiOperation("此方法XXX")
+ * //访问3.0网址:http://localhost/swagger-ui/index.html
+ * //2.0的:http://localhost/swagger-ui.html
  */
 @Configuration
 //@EnableSwagger2 3.0之前版本用
@@ -44,20 +49,20 @@ public class Swagger2Config {
                 //withMethodAnnotation(GetMapping.class)
                 .apis(RequestHandlerSelectors.basePackage("com.dlb.controller"))
                 //扫描过滤 ,只扫描 ant("请求")
-                .paths(PathSelectors.ant("/a/*"))
+                //.paths(PathSelectors.ant("/a/*"))
                 .build();
 
     }
     //配置swagger信息 需要apiInfo()
     public ApiInfo apiInfo() {
-        Contact contact = new Contact("我的名字", "http://www.gonogo.com", "我的邮箱");
+        Contact contact = new Contact("大萝北北", "http://www.gonogo.com", "279080122@qq.com");
         return new ApiInfo("校园通"
                 , "本项目由大萝卜打造，使用springboot框架搭建。向着小目标前进"
                 , "1.0"
                 , "urn:tos"
                 , contact
-                , "Apache 2.0"
-                , "http://www.apache.org/licenses/LICENSE-2.0"
+                , "萝北贝的博客"
+                , "https://www.cnblogs.com/9080dlb/"
                 , new ArrayList());
     }
 }

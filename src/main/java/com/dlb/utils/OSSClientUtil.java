@@ -3,38 +3,43 @@ package com.dlb.utils;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.ObjectMetadata;
-import com.dlb.config.OSSConfig;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Date;
 
 //图片上传
-@Data
-@Component
+@Configuration
+@PropertySource("classpath:allocation.properties") //读取配置文件allocation
+@ConfigurationProperties(prefix="oss") //读取oss节点
+@Data //使用set方法将oss节点中的值填充到当前类的属性中,所以不能在构造方法中赋值
+//打开项目设置选择模块--spring---点击spring开关按钮--点击加号找到目标文件，
+//此时配置文件是全黄色，重启项目或者重新构建项目就OK了，可以点击跳转！记得不要忘记导包
 public class OSSClientUtil {
 
-    @Autowired
-    private OSSConfig ossConfig;
-    private  String endpoint = ossConfig.getEndpoint();
-    private String accessKeyId = ossConfig.getAccessKeyId();
-    private String accessKeySecret = ossConfig.getAccessKeySecret();
-    private String bucketName = ossConfig.getBucketName();
-    private String fileDir = ossConfig.getFileDir();
+    private String endpoint;
+    private String accessKeyId;
+    private String accessKeySecret;
+    private String bucketName;
+    private String fileDir;
 
     private OSS ossClient = null;
 
     public OSSClientUtil(){
-        ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+        System.out.println("参数1"+endpoint);
+       // ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
     }
 
     /**
      * 初始化
      */
     public void init() {
+        System.out.println("参数2"+endpoint);
         ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
     }
 

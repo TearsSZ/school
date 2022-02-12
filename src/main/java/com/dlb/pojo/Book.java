@@ -36,6 +36,14 @@ public class Book {
     @TableField("cf_id")
     private Integer cfId;
 
+    @ApiModelProperty("标题")
+    @TableField("titles")
+    private String titles;
+
+    @ApiModelProperty("内容")
+    @TableField("content")
+    private String content;
+
     @ApiModelProperty("来源")
     @TableField("source")
     private String source;

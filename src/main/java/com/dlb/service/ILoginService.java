@@ -13,4 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ILoginService extends IService<Login> {
 
+    Login queryByPhone(String phone);
+
+    void saveByPhone(String phone, Login login);
 }

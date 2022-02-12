@@ -3,6 +3,8 @@ package com.dlb.service;
 import com.dlb.pojo.Book;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IBookService extends IService<Book> {
 
+    List<Book> findCondition(Integer sId, Integer cfId);
+
+    List<Book> selectDim(String keyword);
 }
